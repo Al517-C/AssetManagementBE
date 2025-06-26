@@ -1,0 +1,60 @@
+package com.example.Quanlytaisan.entity;
+
+import com.example.Quanlytaisan.enumtype.MaintenanceType;
+import com.example.Quanlytaisan.enumtype.TicketStatus;
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
+
+@Data
+@Entity
+@Table(name = "maintenance_ticket")
+public class MaintenanceTicket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "device_id", referencedColumnName = "idDevice", nullable = false)
+    private Device device;
+
+    @Column(nullable = false)
+    private LocalDateTime createdDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
+    private TicketStatus status; // PENDING, DONE, CANCELLED
+
+    @Column(length = 255)
+    private String note;
+
+    // Người tạo phiếu bảo trì
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by")
+    private Account createdBy;
+
+    // Người duyệt phiếu bảo trì
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "approved_by")
+    private Account approvedBy;
+
+    @Column
+    private LocalDateTime approvedDate;
+
+    // Liên kết với phiếu xuất kho (nếu đã xuất kho để bảo trì)
+    @OneToOne(mappedBy = "maintenanceTicket", fetch = FetchType.LAZY)
+    private ExportTicket exportTicket;
+
+    // Loại bảo trì
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
+    private MaintenanceType maintenanceType; // PREVENTIVE, CORRECTIVE, EMERGENCY
+
+    // Ngày dự kiến bảo trì
+    @Column
+    private LocalDateTime scheduledDate;
+
+    // Ngày hoàn thành bảo trì
+    @Column
+    private LocalDateTime completedDate;
+}
