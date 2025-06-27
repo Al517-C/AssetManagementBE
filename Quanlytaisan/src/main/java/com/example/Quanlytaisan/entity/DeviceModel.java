@@ -18,6 +18,6 @@ public class DeviceModel {
     @JoinColumn(name = "type_id", referencedColumnName = "idType", nullable = false)
     private DeviceType deviceType;
 
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false, length = 50)
     private String modelinfo;
 }

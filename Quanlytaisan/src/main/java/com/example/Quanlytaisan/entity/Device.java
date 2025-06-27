@@ -7,7 +7,6 @@ import lombok.*;
 @Entity
 @Table(name = "device")
 public class Device {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDevice;

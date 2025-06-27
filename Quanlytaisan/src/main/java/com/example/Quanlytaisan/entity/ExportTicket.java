@@ -1,7 +1,6 @@
 package com.example.Quanlytaisan.entity;
 
 import com.example.Quanlytaisan.enumtype.ExportType;
-import com.example.Quanlytaisan.enumtype.TicketStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -15,11 +14,11 @@ public class ExportTicket {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "device_id", referencedColumnName = "idDevice", nullable = false)
+    @JoinColumn(name = "device_id", referencedColumnName = "idDevice")
     private Device device;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "from_stock_id", referencedColumnName = "idStock", nullable = false)
+    @JoinColumn(name = "from_stock_id", referencedColumnName = "idStock")
     private Stock fromStock;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -59,9 +58,4 @@ public class ExportTicket {
     @JoinColumn(name = "disposal_ticket_id")
     private DisposalTicket disposalTicket;
 
-
-    // Trạng thái xuất kho
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
-    private TicketStatus status; // PENDING, COMPLETED, CANCELLED
 }

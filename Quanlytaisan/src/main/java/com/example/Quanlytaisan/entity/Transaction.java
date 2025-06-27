@@ -11,13 +11,12 @@ import lombok.*;
 @Entity
 @Table(name = "transaction")
 public class Transaction {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTransaction;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "device_id", referencedColumnName = "idDevice", nullable = false)
+    @JoinColumn(name = "device_id", referencedColumnName = "idDevice")
     private Device device;
 
     @Column(nullable = false)
