@@ -21,16 +21,22 @@ public class ImportTicket {
     @JoinColumn(name = "device_id")
     private Device device;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stock_id")
-    private Stock stock;
-
     @Column(nullable = false)
     private Integer quantity;
+
+    // Kho nhập (nơi xuất kho nếu là nhập từ site khác)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "from_stock_id")
+    private Stock fromStock; // nullable nếu không phải nhập từ site khác
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stock_id")
+    private Stock stock;// Kho nhập (nơi nhập kho)
 
     @Column(nullable = false)
     private LocalDateTime importDate;
 
+    // Người tạo phiếu nhập kho
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "performed_by")
     private Account performedBy;

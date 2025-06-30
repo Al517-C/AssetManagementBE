@@ -20,10 +20,6 @@ public class DisposalTicket {
     @Column(nullable = false)
     private LocalDateTime createdDate;
 
-    /*@Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
-    private TicketStatus status; // PENDING, DONE, CANCELLED */
-
     @Column(length = 255)
     private String note;
 

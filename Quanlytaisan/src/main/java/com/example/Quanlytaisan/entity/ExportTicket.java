@@ -47,18 +47,21 @@ public class ExportTicket {
     @Column(nullable = false)
     private LocalDateTime createdDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by")
+    private Account createdBy; // Người tạo phiếu xuất kho
+
     @Column(nullable = false)
     private boolean approved; // true nếu admin đã duyệt
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "approved_by")
-    private Account approvedBy;
+    private Account approvedBy;// Người duyệt phiếu xuất kho (nếu đã duyệt)
 
     @Column
     private LocalDateTime approvedDate;
 
     @Column(length = 255)
     private String note;
-
 
 }

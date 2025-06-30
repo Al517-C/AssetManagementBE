@@ -34,6 +34,7 @@ public class Transaction {
     @JoinColumn(name = "import_ticket_id")
     private ImportTicket importTicket;
 
+    // Liên kết với phiếu xuất kho (nếu có)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "export_ticket_id")
     private ExportTicket exportTicket;
@@ -60,5 +61,5 @@ public class Transaction {
     // Trạng thái giao dịch
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
-    private TicketStatus status; // PENDING, COMPLETED, CANCELLED, FAILED
+    private TicketStatus status; // PENDING, APPROVED, REJECTED, CANCELLED
 }

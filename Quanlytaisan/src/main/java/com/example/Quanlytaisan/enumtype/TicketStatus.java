@@ -4,9 +4,7 @@ public enum TicketStatus {
     PENDING("Chờ xử lý"),
     APPROVED("Đã duyệt"),
     REJECTED("Từ chối"),
-    COMPLETED("Hoàn thành"),
-    CANCELLED("Đã hủy"),
-    IN_PROGRESS("Đang xử lý");
+    CANCELLED("Đã hủy");
 
     private final String description;
 
