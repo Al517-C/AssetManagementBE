@@ -1,8 +1,6 @@
 package com.example.Quanlytaisan.entity;
 
-import com.example.Quanlytaisan.enumtype.DisposalMethod;
 import com.example.Quanlytaisan.enumtype.DisposalReason;
-import com.example.Quanlytaisan.enumtype.TicketStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -43,8 +41,4 @@ public class DisposalTicket {
     @Column(nullable = false, length = 100)
     private DisposalReason disposalReason; // HONG_HONG, CU_KY, KHONG_SU_DUNG, NANG_CAP
 
-    // Phương thức thanh lý
-    @Enumerated(EnumType.STRING)
-    @Column(length = 50)
-    private DisposalMethod disposalMethod; // BAN, VUT_BO, TAI_CHE, CHUYEN_GIAO
 }

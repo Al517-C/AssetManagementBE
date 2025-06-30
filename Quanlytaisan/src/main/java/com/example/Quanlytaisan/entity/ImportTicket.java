@@ -1,5 +1,6 @@
 package com.example.Quanlytaisan.entity;
 
+import com.example.Quanlytaisan.enumtype.ImportType;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,10 @@ public class ImportTicket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idImportTicket;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
+    private ImportType importType; // nhap moi, nhap bao tri, nhap tra ve, nhap tu Site khac
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "device_id")

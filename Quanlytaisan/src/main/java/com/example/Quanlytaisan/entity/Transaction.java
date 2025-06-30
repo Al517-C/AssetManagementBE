@@ -27,22 +27,16 @@ public class Transaction {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
-    private TransactionType typetransaction; // IMPORT, EXPORT, TRANSFER, ADJUSTMENT
+    private TransactionType typetransaction; // IMPORT, EXPORT, TRANSFER
 
-    // Liên kết với phiếu xuất kho (nếu có)
+    // Liên kết với phiếu nhập kho (nếu có)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "import_ticket_id")
+    private ImportTicket importTicket;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "export_ticket_id")
     private ExportTicket exportTicket;
-
-    // Liên kết với phiếu bảo trì (nếu có)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "maintenance_ticket_id")
-    private MaintenanceTicket maintenanceTicket;
-
-    // Liên kết với phiếu thanh lý (nếu có)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "disposal_ticket_id")
-    private DisposalTicket disposalTicket;
 
     // Kho nguồn (cho giao dịch xuất/chuyển)
     @ManyToOne(fetch = FetchType.LAZY)

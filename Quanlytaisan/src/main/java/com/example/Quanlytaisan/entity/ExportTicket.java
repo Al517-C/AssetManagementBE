@@ -17,20 +17,32 @@ public class ExportTicket {
     @JoinColumn(name = "device_id", referencedColumnName = "idDevice")
     private Device device;
 
+    // Kho nguồn (nơi xuất kho)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "from_stock_id", referencedColumnName = "idStock")
     private Stock fromStock;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
+    private ExportType type; // CAP_PHAT, BAO_TRI, THANH_LY, CHUYEN_SITE
+
+    // Liên kết với phiếu bảo trì (nếu xuất kho để bảo trì)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "maintenance_ticket_id")
+    private MaintenanceTicket maintenanceTicket;
+
+    // Liên kết với phiếu thanh lý (nếu xuất kho để thanh lý)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "disposal_ticket_id")
+    private DisposalTicket disposalTicket;
+
+    // Kho đích (nơi nhận kho nếu chuyển site)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "to_stock_id", referencedColumnName = "idStock")
     private Stock toStock; // nullable nếu không chuyển site
 
     @Column(nullable = false)
     private Integer quantity;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
-    private ExportType type; // CAP_PHAT, BAO_TRI, THANH_LY, CHUYEN_SITE
 
     @Column(nullable = false)
     private LocalDateTime createdDate;
@@ -48,14 +60,5 @@ public class ExportTicket {
     @Column(length = 255)
     private String note;
 
-    // Liên kết với phiếu bảo trì (nếu xuất kho để bảo trì)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "maintenance_ticket_id")
-    private MaintenanceTicket maintenanceTicket;
-
-    // Liên kết với phiếu thanh lý (nếu xuất kho để thanh lý)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "disposal_ticket_id")
-    private DisposalTicket disposalTicket;
 
 }

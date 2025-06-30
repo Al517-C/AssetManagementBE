@@ -1,13 +1,10 @@
 package com.example.Quanlytaisan.enumtype;
 
 public enum DeviceStatus {
-    AVAILABLE("Có sẵn"),
+    IN_STOCK("Có sẵn trong kho"),
     IN_USE("Đang sử dụng"),
     MAINTENANCE("Đang bảo trì"),
-    DISPOSED("Đã thanh lý"),
-    DAMAGED("Hỏng hóc"),
-    RESERVED("Đã đặt trước"),
-    TRANSFERRED("Đã chuyển đi");
+    DISPOSED("Đã thanh lý");
 
     private final String description;
 

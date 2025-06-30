@@ -2,12 +2,10 @@ package com.example.Quanlytaisan.enumtype;
 
 public enum TransactionType {
     IMPORT("Nhập kho"),
-    EXPORT("Xuất kho"),
+    CAPPHAT_EXPORT("Xuất kho cấp phát"),
     TRANSFER("Chuyển kho"),
-    ADJUSTMENT("Điều chỉnh"),
     MAINTENANCE_EXPORT("Xuất bảo trì"),
-    DISPOSAL_EXPORT("Xuất thanh lý"),
-    RETURN("Trả về");
+    DISPOSAL_EXPORT("Xuất thanh lý");
 
     private final String description;
 
