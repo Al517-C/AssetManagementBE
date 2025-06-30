@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 public class UsesDTO {
     Long idUses;
     Long idSite;
+    String siteName;
     String usesName;
     String nameLocation;
 }

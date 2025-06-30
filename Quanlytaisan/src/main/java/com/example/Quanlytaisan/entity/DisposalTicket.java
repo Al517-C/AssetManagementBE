@@ -35,6 +35,6 @@ public class DisposalTicket {
     // Lý do thanh lý
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 100)
-    private DisposalReason disposalReason; // HONG_HONG, CU_KY, KHONG_SU_DUNG, NANG_CAP
+    private DisposalReason disposalReason; // ly do thanh ly
 
 }
