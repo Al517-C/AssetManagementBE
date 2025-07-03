@@ -1,7 +1,6 @@
 package com.example.Quanlytaisan.entity;
 
 import com.example.Quanlytaisan.enumtype.ExportType;
-import com.example.Quanlytaisan.enumtype.TicketStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -15,39 +14,17 @@ public class ExportTicket {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "device_id", referencedColumnName = "idDevice", nullable = false)
+    @JoinColumn(name = "device_id", referencedColumnName = "idDevice")
     private Device device;
 
+    // Kho nguồn (nơi xuất kho)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "from_stock_id", referencedColumnName = "idStock", nullable = false)
+    @JoinColumn(name = "from_stock_id", referencedColumnName = "idStock")
     private Stock fromStock;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "to_stock_id", referencedColumnName = "idStock")
-    private Stock toStock; // nullable nếu không chuyển site
-
-    @Column(nullable = false)
-    private Integer quantity;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
     private ExportType type; // CAP_PHAT, BAO_TRI, THANH_LY, CHUYEN_SITE
-
-    @Column(nullable = false)
-    private LocalDateTime createdDate;
-
-    @Column(nullable = false)
-    private boolean approved; // true nếu admin đã duyệt
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "approved_by")
-    private Account approvedBy;
-
-    @Column
-    private LocalDateTime approvedDate;
-
-    @Column(length = 255)
-    private String note;
 
     // Liên kết với phiếu bảo trì (nếu xuất kho để bảo trì)
     @OneToOne(fetch = FetchType.LAZY)
@@ -59,9 +36,32 @@ public class ExportTicket {
     @JoinColumn(name = "disposal_ticket_id")
     private DisposalTicket disposalTicket;
 
+    // Kho đích (nơi nhận kho nếu chuyển site)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "to_stock_id", referencedColumnName = "idStock")
+    private Stock toStock; // nullable nếu không chuyển site
 
-    // Trạng thái xuất kho
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
-    private TicketStatus status; // PENDING, COMPLETED, CANCELLED
+    @Column(nullable = false)
+    private Integer quantity;
+
+    @Column(nullable = false)
+    private LocalDateTime createdDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by")
+    private Account createdBy; // Người tạo phiếu xuất kho
+
+    @Column(nullable = false)
+    private boolean approved; // true nếu admin đã duyệt
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "approved_by")
+    private Account approvedBy;// Người duyệt phiếu xuất kho (nếu đã duyệt)
+
+    @Column
+    private LocalDateTime approvedDate;
+
+    @Column(length = 255)
+    private String note;
+
 }

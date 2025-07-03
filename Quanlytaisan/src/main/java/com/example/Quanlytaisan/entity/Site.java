@@ -3,11 +3,7 @@ package com.example.Quanlytaisan.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Setter
-@Getter
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "site")
 public class Site {

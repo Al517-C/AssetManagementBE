@@ -8,10 +8,9 @@ import lombok.*;
 @Entity
 @Table(name = "devicestock")
 public class DeviceStock {
-
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "device_id", referencedColumnName = "idDevice", nullable = false)
+    @JoinColumn(name = "device_id", referencedColumnName = "idDevice", nullable = true)
     private Device device;
 
     @Id

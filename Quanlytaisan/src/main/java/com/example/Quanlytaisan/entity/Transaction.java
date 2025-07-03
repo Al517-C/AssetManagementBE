@@ -11,13 +11,12 @@ import lombok.*;
 @Entity
 @Table(name = "transaction")
 public class Transaction {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTransaction;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "device_id", referencedColumnName = "idDevice", nullable = false)
+    @JoinColumn(name = "device_id", referencedColumnName = "idDevice")
     private Device device;
 
     @Column(nullable = false)
@@ -28,22 +27,17 @@ public class Transaction {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
-    private TransactionType typetransaction; // IMPORT, EXPORT, TRANSFER, ADJUSTMENT
+    private TransactionType typetransaction; // IMPORT, EXPORT, TRANSFER
+
+    // Liên kết với phiếu nhập kho (nếu có)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "import_ticket_id")
+    private ImportTicket importTicket;
 
     // Liên kết với phiếu xuất kho (nếu có)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "export_ticket_id")
     private ExportTicket exportTicket;
-
-    // Liên kết với phiếu bảo trì (nếu có)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "maintenance_ticket_id")
-    private MaintenanceTicket maintenanceTicket;
-
-    // Liên kết với phiếu thanh lý (nếu có)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "disposal_ticket_id")
-    private DisposalTicket disposalTicket;
 
     // Kho nguồn (cho giao dịch xuất/chuyển)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -67,5 +61,5 @@ public class Transaction {
     // Trạng thái giao dịch
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
-    private TicketStatus status; // PENDING, COMPLETED, CANCELLED, FAILED
+    private TicketStatus status; // PENDING, APPROVED, REJECTED, CANCELLED
 }
